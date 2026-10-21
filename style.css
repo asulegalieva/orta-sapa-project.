@@ -1,0 +1,273 @@
+
+:root {
+  --navy: #173b65;
+  --blue: #3979b9;
+  --pale: #eef5fc;
+  --gold: #c9a45c;
+  --text: #26374b;
+  --muted: #78879a;
+  --white: #ffffff;
+  --border: #e1e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f5f8fc;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 255px;
+  padding: 26px 18px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 42px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.brand strong {
+  display: block;
+  color: var(--navy);
+  letter-spacing: 1px;
+}
+
+.brand small,
+.sidebar-footer small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.menu-label,
+.eyebrow {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-item {
+  border: 0;
+  background: transparent;
+  color: #596a7f;
+  text-align: left;
+  padding: 13px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: var(--pale);
+  color: var(--navy);
+  font-weight: bold;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--navy);
+}
+
+.main {
+  margin-left: 255px;
+  padding: 0 38px 30px;
+  min-height: 100vh;
+}
+
+.topbar {
+  min-height: 68px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.status {
+  color: #367f63;
+  letter-spacing: 0;
+}
+
+.welcome {
+  margin: 30px 0;
+  padding: 32px;
+  background: linear-gradient(120deg, #173b65, #3979b9);
+  border-radius: 18px;
+  color: white;
+}
+
+.welcome .eyebrow {
+  color: #d4e4f8;
+}
+
+.welcome h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 14px 0 8px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #f1d69c;
+  font-size: 19px;
+}
+
+.description {
+  max-width: 620px;
+  line-height: 1.8;
+  font-size: 14px;
+  color: #e8f1fc;
+}
+
+.panel {
+  background: white;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.panel h2 {
+  color: var(--navy);
+  margin-top: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.metric strong {
+  display: block;
+  color: var(--navy);
+  font-size: 27px;
+  margin: 10px 0;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.primary-button,
+.score-button {
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 16px;
+  background: var(--navy);
+  color: white;
+  cursor: pointer;
+}
+
+.score-button {
+  background: var(--pale);
+  color: var(--navy);
+  margin: 4px;
+  min-width: 38px;
+}
+
+.score-button.selected {
+  background: var(--navy);
+  color: white;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 10px;
+  background: var(--pale);
+  overflow: hidden;
+}
+
+.progress div {
+  height: 100%;
+  background: var(--gold);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+footer {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 32px;
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+
+  .sidebar-footer {
+    margin-top: 20px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 0 16px 24px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    padding: 14px 0;
+  }
+}
