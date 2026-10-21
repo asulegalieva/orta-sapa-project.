@@ -8,28 +8,40 @@
   --muted: #78879a;
   --white: #ffffff;
   --border: #e1e8f0;
+  --background: #f5f8fc;
+  --green: #367f63;
+  --shadow: 0 4px 16px rgba(23, 59, 101, 0.05);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--text);
-  background: #f5f8fc;
+  background: var(--background);
+  line-height: 1.5;
 }
+
+/* Боковое меню */
 
 .sidebar {
   position: fixed;
   inset: 0 auto 0 0;
+  z-index: 10;
   width: 255px;
   padding: 26px 18px;
   background: var(--white);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .brand {
@@ -42,6 +54,7 @@ body {
 .brand-icon {
   width: 44px;
   height: 44px;
+  flex-shrink: 0;
   border-radius: 14px;
   background: var(--navy);
   color: white;
@@ -73,12 +86,17 @@ body {
   color: var(--muted);
 }
 
+.menu-label {
+  margin-bottom: 12px;
+}
+
 nav {
   display: grid;
   gap: 8px;
 }
 
 .nav-item {
+  width: 100%;
   border: 0;
   background: transparent;
   color: #596a7f;
@@ -87,6 +105,8 @@ nav {
   border-radius: 9px;
   cursor: pointer;
   font-size: 14px;
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
 }
 
 .nav-item:hover,
@@ -104,10 +124,13 @@ nav {
   color: var(--navy);
 }
 
+/* Основная часть сайта */
+
 .main {
   margin-left: 255px;
   padding: 0 38px 30px;
   min-height: 100vh;
+  min-width: 0;
 }
 
 .topbar {
@@ -123,9 +146,11 @@ nav {
 }
 
 .status {
-  color: #367f63;
+  color: var(--green);
   letter-spacing: 0;
 }
+
+/* Приветственный блок */
 
 .welcome {
   margin: 30px 0;
@@ -133,6 +158,7 @@ nav {
   background: linear-gradient(120deg, #173b65, #3979b9);
   border-radius: 18px;
   color: white;
+  box-shadow: var(--shadow);
 }
 
 .welcome .eyebrow {
@@ -157,23 +183,44 @@ nav {
   color: #e8f1fc;
 }
 
-.panel {
-  background: white;
+/* Карточки и панели */
+
+.panel,
+.card {
+  background: var(--white);
   padding: 24px;
   border: 1px solid var(--border);
   border-radius: 14px;
   margin-bottom: 20px;
+  min-width: 0;
 }
 
-.panel h2 {
+.panel h2,
+.card h2,
+.card h3 {
   color: var(--navy);
+}
+
+.panel h2,
+.card h2 {
   margin-top: 0;
 }
 
-.cards {
+.card h3 {
+  margin-top: 0;
+}
+
+.card p,
+.panel p {
+  line-height: 1.7;
+}
+
+.cards,
+.dashboard {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+  margin-bottom: 20px;
 }
 
 .metric {
@@ -181,6 +228,7 @@ nav {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
+  min-width: 0;
 }
 
 .metric strong {
@@ -190,32 +238,157 @@ nav {
   margin: 10px 0;
 }
 
+.dashboard .card {
+  margin-bottom: 0;
+}
+
+.big-number {
+  color: var(--navy);
+  font-size: 30px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
 .muted {
   color: var(--muted);
   font-size: 13px;
 }
 
+/* Карточки шести разделов */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.section-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  background: #f9fbfe;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.section-card:hover {
+  border-color: #b7cde5;
+  transform: translateY(-2px);
+}
+
+.section-card h3 {
+  margin-top: 0;
+  line-height: 1.5;
+}
+
+.section-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Кнопки */
+
 .primary-button,
+.card button[data-action] {
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  background: var(--navy);
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.primary-button:hover,
+.card button[data-action]:hover {
+  background: var(--blue);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #9bc4ed;
+  outline-offset: 2px;
+}
+
+/* Оценивание ECERS-3 */
+
+.score-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.score-item:last-child {
+  border-bottom: 0;
+}
+
+.score-item p {
+  margin: 0 0 12px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.score-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .score-button {
   border: 0;
   border-radius: 8px;
   padding: 11px 16px;
-  background: var(--navy);
-  color: white;
-  cursor: pointer;
-}
-
-.score-button {
   background: var(--pale);
   color: var(--navy);
-  margin: 4px;
-  min-width: 38px;
+  cursor: pointer;
+  margin: 0;
+  min-width: 40px;
+  min-height: 40px;
+  font-family: inherit;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+
+.score-button:hover {
+  background: var(--blue);
+  color: white;
 }
 
 .score-button.selected {
   background: var(--navy);
   color: white;
 }
+
+/* Поля организации и возрастной группы */
+
+.card label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 18px 0 8px;
+}
+
+.card input,
+.card select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.card input:focus,
+.card select:focus {
+  border-color: var(--blue);
+}
+
+/* Индикатор прогресса */
 
 .progress {
   height: 8px;
@@ -227,30 +400,96 @@ nav {
 .progress div {
   height: 100%;
   background: var(--gold);
+  transition: width 0.3s;
 }
+
+/* Таблицы */
 
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-td, th {
+td,
+th {
   text-align: left;
   padding: 12px 8px;
   border-bottom: 1px solid var(--border);
   font-size: 13px;
 }
 
+th {
+  color: var(--navy);
+  background: var(--pale);
+  font-weight: bold;
+}
+
+/* Результаты и история */
+
+.result-row {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+
+.result-row:last-child {
+  border-bottom: 0;
+}
+
+.result-row p {
+  margin: 6px 0;
+}
+
+.result-row small {
+  color: var(--muted);
+}
+
+/* Нижняя часть сайта */
+
 footer {
   color: var(--muted);
   font-size: 12px;
   margin-top: 32px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
 }
+
+/* Планшеты */
+
+@media (max-width: 1000px) {
+  .main {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .cards,
+  .dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Телефоны */
 
 @media (max-width: 800px) {
   .sidebar {
     position: static;
     width: 100%;
+    padding: 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand {
+    margin-bottom: 22px;
+  }
+
+  nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-item {
+    font-size: 13px;
+    padding: 11px 9px;
   }
 
   .sidebar-footer {
@@ -262,12 +501,42 @@ footer {
     padding: 0 16px 24px;
   }
 
-  .cards {
+  .cards,
+  .dashboard,
+  .section-grid {
     grid-template-columns: 1fr;
+  }
+
+  .welcome {
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .welcome h1 {
+    font-size: 34px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+
+  .card,
+  .panel {
+    padding: 18px;
   }
 
   .topbar {
     flex-wrap: wrap;
     padding: 14px 0;
+  }
+
+  .score-button {
+    min-width: 36px;
+    padding: 9px 12px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
   }
 }
